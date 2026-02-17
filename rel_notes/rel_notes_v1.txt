@@ -1,3 +1,4 @@
 -- REL NOTES V1
 - Adding rel_notes
-
+- FIXING LINNEAR ISSUE EUR Project
+- FIXING SNAPSHOT 20/02/2026 
