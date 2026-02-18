@@ -1,5 +1,6 @@
 import pandas as pd
 
 def aggregate_rows(df):
-    return pd.DataFrame({"total_sum_rows": df.sum(axis=1)})
+    return pd.DataFrame({"sum_total": df.sum(axis=1)})
+
 
