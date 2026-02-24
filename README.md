@@ -16,3 +16,6 @@ Set optional environment variables:
 Run a quick smoke test in python:
 ```bash
 python -c "from src.config.global_config import get_runtime_context; print(get_runtime_context())"
+
+## Notes
+This repository is used for connector QA scenarios (GitHub + Linear).
