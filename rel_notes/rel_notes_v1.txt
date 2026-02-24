@@ -6,3 +6,4 @@
 
 -- Unreleased
 - MIC-207: Treat blank ENV as missing and use default.
+- Add request_id to runtime context logs.
