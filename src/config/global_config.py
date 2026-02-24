@@ -31,7 +31,7 @@ def get_config_value(key: str, default: Optional[str] = None) -> str:
         return default
     return value
 
-
+# TODO(MIC-209): investigate possible memory growth when reloading config repeatedly
 def get_runtime_context() -> str:
     """
     Returns a single structured line describing the runtime context.
