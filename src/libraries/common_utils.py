@@ -1,35 +1,21 @@
-import pandas as pd
-import numpy as np
-import os
-import sys
-import math
+from __future__ import annotations
 
-x = 10
-
-def aggregate_rows(df):
-    total = []
-    for i in range(len(df)):
-        s = 0
-        for j in range(len(df.columns)):
-            s = s + df.iloc[i][j]
-        total.append(s)
-    return pd.DataFrame(total)
-
-def processData(data):
-    result = aggregate_rows(data)
-    print("Processing done")
-    return result
-
-def useless_function(a,b,c,d,e,f,g,h,i,j):
-    return a
-
-def main():
-    df = pd.DataFrame([[1,2,3],[4,5,6]])
-    r = processData(df)
-    print(r)
-
-if __name__ == "__main__":
-    main()
+import json
+from typing import Any, Dict
 
 
+def format_log_line(message: str, fields: Dict[str, Any] | None = None) -> str:
+    """
+    Minimal JSON-line formatter to simulate structured logs.
+    """
+    payload: Dict[str, Any] = {"message": message}
+    if fields:
+        payload.update(fields)
+    return json.dumps(payload, ensure_ascii=False)
 
+
+def safe_lower(s: str | None) -> str | None:
+    """
+    Small helper used in some PRs to show safe handling of null-ish strings.
+    """
+    return s.lower() if s is not None else None
