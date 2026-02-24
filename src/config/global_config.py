@@ -39,6 +39,10 @@ def get_runtime_context() -> str:
     """
     env = get_config_value("ENV", default="dev")
     mode = get_config_value("MODE", default="standard")
+    request_id = get_config_value("REQUEST_ID", default="")
 
     ctx = RuntimeContext(env=env, mode=mode)
-    return format_log_line("runtime_context", {"env": ctx.env, "mode": ctx.mode})
+    return format_log_line(
+        "runtime_context",
+        {"env": ctx.env, "mode": ctx.mode, "request_id": request_id},
+    )
