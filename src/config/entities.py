@@ -1,3 +1,12 @@
-STR_CUSTOMER_KEY = "DimCustomer"
-STR_CUSTOMER_PATH = "CommonDataModel/Dimensions/"
-STR_CUSTOMER_CONTAINER = "europe"
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class RuntimeContext:
+    """
+    Small immutable entity representing runtime config/context.
+    """
+    env: str
+    mode: str
