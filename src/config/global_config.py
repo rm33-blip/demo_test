@@ -14,10 +14,17 @@ class ConfigError(RuntimeError):
 def get_config_value(key: str, default: Optional[str] = None) -> str:
     """
     Read a config value from environment variables.
+    - Treats empty/whitespace-only values as missing.
     - If missing and default is provided: returns default
     - If missing and no default: raises ConfigError
     """
     value = os.getenv(key)
+
+    if value is not None:
+        value = value.strip()
+        if value == "":
+            value = None
+
     if value is None:
         if default is None:
             raise ConfigError(f"Missing required config key: {key}")

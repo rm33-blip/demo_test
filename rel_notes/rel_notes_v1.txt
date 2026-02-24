@@ -5,4 +5,4 @@
 - Change OVERWTRITE TO MERGE to avoid lost of products TICKECT 77038757
 
 -- Unreleased
-- TBD
+- MIC-207: Treat blank ENV as missing and use default.
