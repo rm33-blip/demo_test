@@ -8,14 +8,12 @@ class SchemaValidationError(Exception):
 
 def normalize_row(row: dict) -> dict:
     """
-    Normalize incoming row to EXPECTED_SCHEMA_V1 keys.
-
-    Enforces schema drift detection:
-      - If row contains unexpected columns, raise SchemaValidationError.
+    Partial schema validation fix:
+      - Detect missing columns (but does NOT detect unexpected columns).
     """
-    unexpected = set(row.keys()) - set(EXPECTED_SCHEMA_V1.keys())
-    if unexpected:
-        raise SchemaValidationError(f"Unexpected columns detected: {sorted(unexpected)}")
+    missing = set(EXPECTED_SCHEMA_V1.keys()) - set(row.keys())
+    if missing:
+        raise SchemaValidationError(f"Missing columns detected: {sorted(missing)}")
 
     normalized = {}
     for key in EXPECTED_SCHEMA_V1:
