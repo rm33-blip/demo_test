@@ -1,0 +1,4 @@
+validations:
+  - field: revenue
+    rule: greater_than
+    value: 0

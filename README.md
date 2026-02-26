@@ -27,6 +27,17 @@ This repository is used for connector QA scenarios (GitHub + Linear).
 }
 ```
 
+## Validations (YAML)
+
+You can configure validations via YAML:
+
+```yaml
+validations:
+  - field: revenue
+    rule: greater_than
+    value: 0
+```
+
 Run a quick smoke test in python:
 
 ```bash
