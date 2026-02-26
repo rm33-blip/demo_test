@@ -14,4 +14,7 @@ def process(rows: list, config_path: str = "src/config/default_validations.yml")
         apply_validation_rules(nr, rules)
         normalized.append(nr)
 
+    # Deterministic ordering
+    normalized = sorted(normalized, key=lambda x: (x.get("customer_id") is None, x.get("customer_id")))
+
     return aggregate_revenue(normalized)
