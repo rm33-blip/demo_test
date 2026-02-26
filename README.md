@@ -13,9 +13,22 @@ Set optional environment variables:
 - ENV (default: dev)
 - MODE (default: standard)
 
-Run a quick smoke test in python:
-```bash
-python -c "from src.config.global_config import get_runtime_context; print(get_runtime_context())"
-
 ## Notes
 This repository is used for connector QA scenarios (GitHub + Linear).
+
+## Output
+
+`process(rows)` returns a dictionary:
+
+```json
+{
+  "total_revenue": 1234.5,
+  "valid_rows": 10
+}
+```
+
+Run a quick smoke test in python:
+
+```bash
+python -c "from src.config.global_config import get_runtime_context; print(get_runtime_context())"
+```
