@@ -46,6 +46,15 @@ validations:
 process(rows, request_id="req-123")
 ```
 
+## KPIs (optional)
+
+If input rows include fields like `active_users`, `lost_users`, and `total_users`,
+`process()` will add:
+
+- `kpis.arpu`
+- `kpis.churn_rate`
+
+
 Run a quick smoke test in python:
 
 ```bash
