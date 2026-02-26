@@ -38,6 +38,14 @@ validations:
     value: 0
 ```
 
+## Logging
+
+`process()` supports an optional `request_id`:
+
+```python
+process(rows, request_id="req-123")
+```
+
 Run a quick smoke test in python:
 
 ```bash
