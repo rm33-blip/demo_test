@@ -1,0 +1,8 @@
+- PR #20: MIC-224 Detect unexpected columns in input schema
+- PR #21: Fix revenue aggregation when revenue is null
+- PR #22: MIC-226 Add YAML-driven validation rules
+- PR #24: Ensure deterministic output ordering
+- PR #25: MIC-229 Add request_id to structured logs
+- PR #26: MIC-230 Add KPI calculation engine
+- PR #27: MIC-231 Guard against division by zero in KPI engine
+- PR #28: MIC-232 Fix missing columns detection (partial)
