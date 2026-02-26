@@ -24,14 +24,14 @@ This repository is used for connector QA scenarios (GitHub + Linear).
 {
   "total_revenue": 1234.5,
   "valid_rows": 10
-}
+}```
 
 
 
 Run a quick smoke test in python:
 ```bash
 python -c "from src.config.global_config import get_runtime_context; print(get_runtime_context())"
-
+```
 
 
 
