@@ -9,35 +9,44 @@ from src.config.schema_versions import validate_schema_version, SchemaVersionErr
 
 def _try_compute_kpis(rows: list) -> dict:
     """
-    Optional KPI computation if inputs exist.
-    Uses totals derived from rows if present.
+    Compute KPIs only when the required inputs are present.
     """
     revenue_total = 0.0
     active_users_total = 0
     lost_users_total = 0
     total_users_total = 0
 
-    any_kpi_inputs = False
+    has_revenue = False
+    has_active_users = False
+    has_lost_users = False
+    has_total_users = False
+
     for r in rows:
         if r.get("revenue") is not None:
             revenue_total += float(r["revenue"])
+            has_revenue = True
+
         if r.get("active_users") is not None:
             active_users_total += int(r["active_users"])
-            any_kpi_inputs = True
+            has_active_users = True
+
         if r.get("lost_users") is not None:
             lost_users_total += int(r["lost_users"])
-            any_kpi_inputs = True
+            has_lost_users = True
+
         if r.get("total_users") is not None:
             total_users_total += int(r["total_users"])
-            any_kpi_inputs = True
+            has_total_users = True
 
-    if not any_kpi_inputs:
-        return {}
+    kpis = {}
 
-    return {
-        "arpu": calculate_arpu(revenue_total, active_users_total),
-        "churn_rate": calculate_churn_rate(lost_users_total, total_users_total),
-    }
+    if has_revenue and has_active_users:
+        kpis["arpu"] = calculate_arpu(revenue_total, active_users_total)
+
+    if has_lost_users and has_total_users:
+        kpis["churn_rate"] = calculate_churn_rate(lost_users_total, total_users_total)
+
+    return kpis
 
 
 def process(rows: list, config_path: str = "src/config/default_validations.yml", request_id: str = None):
