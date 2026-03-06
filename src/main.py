@@ -65,7 +65,16 @@ def process(rows: list, config_path: str = "src/config/default_validations.yml",
         apply_validation_rules(nr, rules)
         normalized.append(nr)
 
-    normalized = sorted(normalized, key=lambda x: (x.get("customer_id") is None, x.get("customer_id")))
+    normalized = sorted(
+        normalized,
+        key=lambda x: (
+            x.get("revenue") is None,
+            -(float(x.get("revenue")) if x.get("revenue") is not None else 0.0),
+            x.get("customer_id") is None,
+            x.get("customer_id"),
+        ),
+    )
+
     agg = aggregate_revenue(normalized)
 
     kpis = _try_compute_kpis(rows)

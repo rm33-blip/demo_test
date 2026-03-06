@@ -7,3 +7,4 @@
 - PR #27: MIC-231 Guard against division by zero in KPI engine
 - PR #28: MIC-232 Fix missing columns detection (partial)
 - PR #30: MIC-237 Add strict schema_version validation
+- PR #31: MIC-238 Sort output by revenue DESC then customer_id
