@@ -11,4 +11,5 @@
 - PR #32: MIC-239 Add optional structured logging helper
 - PR #33: MIC-240 Add config cache keyed by path and mtime
 - PR #34: MIC-241 Tighten KPI gating when inputs are missing
+- PR #35: MIC-242 Rename greater_than validation rule to gt
 
