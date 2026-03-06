@@ -7,7 +7,7 @@ def apply_validation_rules(row: dict, rules: list):
     Apply validation rules to a single row.
 
     Supported rules:
-      - greater_than: row[field] must be > value
+      - gt: row[field] must be > value
     """
     for rule in rules or []:
         field = rule.get("field")
@@ -17,9 +17,8 @@ def apply_validation_rules(row: dict, rules: list):
         if field is None or op is None:
             continue
 
-        if op == "greater_than":
+        if op == "gt":
             current = row.get(field)
-            # Treat None as invalid for this rule
             if current is None or float(current) <= float(value):
                 raise ValidationError(f"{field} must be > {value}")
         else:
