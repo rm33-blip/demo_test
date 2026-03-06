@@ -54,6 +54,7 @@ def process(rows: list, config_path: str = "src/config/default_validations.yml",
 
     cfg = load_config(config_path)
     structured_logs = bool(cfg.get("structured_logs", False))
+    fail_on_unexpected_columns = bool(cfg.get("fail_on_unexpected_columns", False))
 
     schema_version = cfg.get("schema_version", "v1")
     try:
@@ -71,13 +72,16 @@ def process(rows: list, config_path: str = "src/config/default_validations.yml",
     log_structured(
         "Loaded validation rules",
         request_id=request_id,
-        fields={"count": len(rules)},
+        fields={
+            "count": len(rules),
+            "fail_on_unexpected_columns": fail_on_unexpected_columns,
+        },
         structured=structured_logs,
     )
 
     normalized = []
     for r in rows:
-        nr = normalize_row(r)
+        nr = normalize_row(r, fail_on_unexpected_columns=fail_on_unexpected_columns)
         apply_validation_rules(nr, rules)
         normalized.append(nr)
 
