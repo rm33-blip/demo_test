@@ -9,3 +9,4 @@
 - PR #30: MIC-237 Add strict schema_version validation
 - PR #31: MIC-238 Sort output by revenue DESC then customer_id
 - PR #32: MIC-239 Add optional structured logging helper
+- PR #33: MIC-240 Add config cache keyed by path and mtime
