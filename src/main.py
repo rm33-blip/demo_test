@@ -4,6 +4,7 @@ from src.utils.config_loader import load_config
 from src.config.validation import apply_validation_rules
 from src.utils.logger import log
 from src.engine.kpi_engine import calculate_arpu, calculate_churn_rate
+from src.config.schema_versions import validate_schema_version, SchemaVersionError
 
 
 def _try_compute_kpis(rows: list) -> dict:
@@ -43,6 +44,18 @@ def process(rows: list, config_path: str = "src/config/default_validations.yml",
     log("Starting process()", request_id=request_id)
 
     cfg = load_config(config_path)
+
+    schema_version = cfg.get("schema_version", "v1")
+    try:
+        validate_schema_version(schema_version)
+    except SchemaVersionError as e:
+        log(
+            f"Schema version validation failed: received={schema_version} "
+            f"supported=['v1'] error={e}",
+            request_id=request_id,
+        )
+        raise
+
     rules = cfg.get("validations", [])
     log(f"Loaded {len(rules)} validation rules", request_id=request_id)
 
@@ -55,7 +68,6 @@ def process(rows: list, config_path: str = "src/config/default_validations.yml",
     normalized = sorted(normalized, key=lambda x: (x.get("customer_id") is None, x.get("customer_id")))
     agg = aggregate_revenue(normalized)
 
-    # Optional KPIs
     kpis = _try_compute_kpis(rows)
     if kpis:
         agg["kpis"] = kpis
